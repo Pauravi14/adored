@@ -107,14 +107,23 @@ p {
 .logo {
   display: inline-flex;
   align-items: center;
-  line-height: 0;
+  gap: 0.55rem;
+  line-height: 1;
 }
 
-.logo-img {
+.logo-mark {
   display: block;
-  height: 2.75rem;
+  height: 2.35rem;
   width: auto;
-  mix-blend-mode: lighten;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-family: var(--font-script);
+  font-size: 2.05rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 .nav {
@@ -208,15 +217,14 @@ p {
 }
 
 .hero-brand {
-  font-family: var(--font-script);
-  font-size: clamp(3.6rem, 10vw, 6.4rem);
-  font-weight: 400;
-  font-variant: normal;
-  text-transform: none;
-  letter-spacing: 0.03em;
-  line-height: 0.92;
   margin: 0 0 1.15rem;
-  white-space: nowrap;
+  line-height: 0;
+}
+
+.hero-logo {
+  display: block;
+  height: clamp(4.5rem, 14vw, 7.5rem);
+  width: auto;
 }
 
 .hero-title {
