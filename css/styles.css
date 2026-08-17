@@ -321,6 +321,7 @@ p {
   overflow: visible;
   opacity: 0;
   transform: translateY(8px) scale(0.96);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
   background-image: linear-gradient(100deg, #8a5a2a 0%, #ffe9c4 28%, #c45c26 48%, #fff 62%, #d4a574 82%, #9a4218 100%);
   background-size: 180% 100%;
   -webkit-background-clip: text;
@@ -333,19 +334,19 @@ p {
 .path-word-end.is-in {
   opacity: 1;
   transform: none;
-  animation: brand-shine 2.4s linear infinite;
+  animation: brand-shine 2.4s linear 0.5s infinite;
 }
 
 .path-word-end.is-in::before {
-  animation: star-twinkle 1.15s ease-in-out infinite;
+  animation: star-twinkle 1.15s ease-in-out 0.4s infinite;
 }
 
 .path-word-end.is-in::after {
-  animation: star-twinkle 1.15s ease-in-out 0.35s infinite;
+  animation: star-twinkle 1.15s ease-in-out 0.55s infinite;
 }
 
 .path-word-end.is-in .brand-glints {
-  animation: star-twinkle 0.9s ease-in-out 0.2s infinite;
+  animation: star-twinkle 0.9s ease-in-out 0.45s infinite;
 }
 
 .path-word-end::before,
