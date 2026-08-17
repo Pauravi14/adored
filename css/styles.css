@@ -217,23 +217,25 @@ p {
   z-index: 1;
   max-width: 42rem;
   padding: calc(var(--header-h) + 3rem) clamp(1.25rem, 4vw, 3rem) clamp(3rem, 8vh, 5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .hero-brand {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.08em;
-  margin: 0 0 1.15rem;
+  display: inline-grid;
+  justify-items: center;
+  gap: 0.06em;
+  margin: 0 auto 1.15rem;
   font-size: clamp(3.6rem, 10vw, 6.4rem);
+  line-height: 1;
 }
 
 .hero-mark {
   display: block;
-  width: 1.2em;
+  width: 1.15em;
   height: auto;
   max-width: none;
-  flex-shrink: 0;
 }
 
 .hero-brand-text {
@@ -255,8 +257,9 @@ p {
   font-size: clamp(1.35rem, 2.5vw, 1.85rem);
   font-weight: 500;
   max-width: none;
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem;
   text-align: center;
+  align-self: center;
 }
 
 .path-line {
