@@ -56,4 +56,27 @@
       heroShots[heroIndex].classList.add("is-active");
     }, 5000);
   }
+
+  const chevron = document.querySelector("[data-orbit-chevron]");
+  const track = chevron && chevron.parentElement;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (chevron && track && !reduceMotion) {
+    let start = null;
+    const moveMs = 900;
+    const holdMs = 1500;
+    const cycle = moveMs + holdMs;
+
+    const tick = (now) => {
+      if (start == null) start = now;
+      const t = (now - start) % cycle;
+      const progress = t < moveMs ? t / moveMs : 1;
+      const x = progress * track.clientWidth;
+      chevron.style.transform = `translate(${x}px, -50%) translateX(-50%)`;
+      chevron.style.opacity = t < 80 ? String(t / 80) : "1";
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  } else if (chevron && track) {
+    chevron.style.transform = `translate(${track.clientWidth}px, -50%) translateX(-50%)`;
+  }
 })();
