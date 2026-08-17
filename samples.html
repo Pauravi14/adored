@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design Samples — Adored</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allura&family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --page: #14110f;
+        --ink: #f4efe7;
+        --mute: #9a9085;
+        --card: #fff;
+        --ember: #c45c26;
+        --pine: #243d36;
+        --lamp: #d4a574;
+        --panel: #1c1714;
+        --line: rgba(244, 239, 231, 0.12);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Outfit", system-ui, sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(ellipse 50% 40% at 90% 0%, rgba(196, 92, 38, 0.22), transparent 55%),
+          radial-gradient(ellipse 40% 35% at 0% 20%, rgba(36, 61, 54, 0.35), transparent 50%),
+          var(--page);
+        line-height: 1.5;
+        min-height: 100vh;
+      }
+      .wrap { max-width: 1180px; margin: 0 auto; padding: 1.25rem 1.1rem 3rem; }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.35rem;
+      }
+      .back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        color: var(--ink);
+        text-decoration: none;
+        font-family: "Allura", cursive;
+        font-weight: 400;
+        font-size: 2.05rem;
+        letter-spacing: 0.02em;
+        line-height: 1;
+      }
+      .back-mark {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: rgba(244, 239, 231, 0.08);
+        border: 1px solid var(--line);
+        transition: background 0.25s ease;
+      }
+      .back:hover .back-mark { background: rgba(196, 92, 38, 0.25); }
+      .topbar-note {
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--lamp);
+        font-weight: 600;
+      }
+
+      .chooser {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        margin: 0 -0.25rem 1.25rem;
+        padding: 0.85rem 0.25rem 1rem;
+        background: linear-gradient(180deg, rgba(20,17,15,.94) 55%, rgba(20,17,15,0));
+        backdrop-filter: blur(12px);
+      }
+      .tabs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
+      }
+      .tab {
+        appearance: none;
+        border: 1px solid var(--line);
+        background:
+          linear-gradient(160deg, rgba(244,239,231,0.06), rgba(244,239,231,0.02));
+        color: var(--ink);
+        border-radius: 1.15rem;
+        min-height: 5.4rem;
+        padding: 1rem 1rem 0.95rem;
+        text-align: left;
+        cursor: pointer;
+        transition: transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .tab::before {
+        content: "";
+        position: absolute;
+        inset: auto -20% -40% auto;
+        width: 7rem;
+        height: 7rem;
+        border-radius: 50%;
+        background: rgba(196, 92, 38, 0.12);
+        transition: transform .35s ease, opacity .35s ease;
+      }
+      .tab:nth-child(2)::before { background: rgba(36, 61, 54, 0.35); }
+      .tab:nth-child(3)::before { background: rgba(212, 165, 116, 0.18); }
+      .tab:nth-child(4)::before { background: rgba(224, 122, 95, 0.22); }
+      .tab:hover {
+        transform: translateY(-3px);
+        border-color: rgba(244, 239, 231, 0.28);
+      }
+      .tab.is-active {
+        border-color: rgba(196, 92, 38, 0.7);
+        background:
+          linear-gradient(160deg, rgba(196, 92, 38, 0.22), rgba(28, 23, 20, 0.9));
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      }
+      .tab.is-active::before { transform: scale(1.3); opacity: 0.9; }
+      .tab-kicker {
+        display: block;
+        font-size: 0.68rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--lamp);
+        margin-bottom: 0.45rem;
+        position: relative;
+      }
+      .tab-label {
+        display: block;
+        font: 750 1.2rem/1.1 "Syne", sans-serif;
+        letter-spacing: -0.03em;
+        position: relative;
+      }
+      .tab-hint {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.78rem;
+        color: var(--mute);
+        position: relative;
+      }
+
+      .empty {
+        display: none;
+        margin-top: 2.5rem;
+        padding: 2.5rem 1.25rem;
+        border: 1px dashed rgba(244, 239, 231, 0.18);
+        border-radius: 1.5rem;
+        text-align: center;
+        color: var(--mute);
+      }
+      .empty.is-visible { display: block; }
+      .empty strong {
+        display: block;
+        font-family: "Syne", sans-serif;
+        font-size: 1.4rem;
+        color: var(--ink);
+        margin-bottom: 0.4rem;
+        letter-spacing: -0.02em;
+      }
+
+      .panel { display: none; }
+      .panel.is-active { display: block; animation: rise 0.45s ease; }
+      @keyframes rise {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: none; }
+      }
+
+      .grid {
+        display: grid;
+        gap: 1.15rem;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      /* Manual news-style sample slider */
+      .sample-slider {
+        position: relative;
+        border-radius: 1.35rem;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--line);
+      }
+
+      .sample-slider-viewport {
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .sample-slider-track {
+        display: flex;
+        transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform;
+      }
+
+      .sample-slide {
+        flex: 0 0 100%;
+        min-width: 100%;
+        padding: 0.85rem;
+        box-sizing: border-box;
+      }
+
+      .sample-slide .card {
+        margin: 0;
+        height: 100%;
+      }
+
+      .sample-slider-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.75rem 1rem 1rem;
+      }
+
+      .sample-slider-dots {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.35rem;
+        flex: 1;
+        min-height: 0.55rem;
+      }
+
+      .sample-dot {
+        appearance: none;
+        border: 0;
+        padding: 0;
+        width: 1.15rem;
+        height: 0.22rem;
+        border-radius: 999px;
+        background: rgba(244, 239, 231, 0.28);
+        cursor: pointer;
+        transition: background 0.25s ease, width 0.25s ease;
+      }
+
+      .sample-dot.is-active {
+        background: #fff;
+        width: 1.55rem;
+      }
+
+      .sample-slider-nav {
+        display: flex;
+        gap: 0.45rem;
+        flex-shrink: 0;
+      }
+
+      .sample-nav-btn {
+        width: 2.35rem;
+        height: 2.35rem;
+        border: 0;
+        border-radius: 0.65rem;
+        background: rgba(244, 239, 231, 0.16);
+        color: #fff;
+        font-size: 1.25rem;
+        line-height: 1;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        transition: background 0.25s ease;
+      }
+
+      .sample-nav-btn:hover {
+        background: rgba(244, 239, 231, 0.28);
+      }
+
+      .sample-nav-btn:disabled {
+        opacity: 0.35;
+        cursor: default;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 18px 42px rgba(23, 20, 15, 0.1);
+        border: 1px solid rgba(23, 20, 15, 0.06);
+      }
+      .card-meta { padding: 1rem 1.1rem 0.5rem; }
+      .tag {
+        display: inline-block;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #7a3b2e;
+        margin-bottom: 0.28rem;
+      }
+      .card-meta h2 {
+        margin: 0 0 0.28rem;
+        font-family: "Syne", sans-serif;
+        font-size: 1.12rem;
+        letter-spacing: -0.02em;
+      }
+      .card-meta p { margin: 0; font-size: 0.86rem; color: var(--mute); }
+      .swatches { display: flex; gap: 0.4rem; padding: 0.55rem 1.1rem 0.8rem; }
+      .swatch {
+        width: 1.75rem; height: 1.75rem; border-radius: 999px;
+        border: 1px solid rgba(0,0,0,.1);
+      }
+      .preview {
+        min-height: 240px;
+        display: grid;
+        grid-template-columns: 0.92fr 1.18fr;
+        overflow: hidden;
+      }
+      .side, .main {
+        padding: 1rem 0.95rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .brand {
+        font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+        text-transform: uppercase; font-family: "Syne", sans-serif;
+      }
+      .side-nav {
+        list-style: none; margin: 1rem 0 0; padding: 0;
+        font-size: 0.78rem; display: grid; gap: 0.4rem; opacity: 0.88;
+      }
+      .hero-title {
+        font-family: "Syne", sans-serif;
+        font-size: 1.22rem; line-height: 1.12; letter-spacing: -0.03em;
+        margin: 0 0 0.4rem; max-width: 12ch;
+      }
+      .hero-text { font-size: 0.8rem; opacity: 0.82; max-width: 28ch; margin: 0 0 0.85rem; }
+      .actions { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+      .btn {
+        border: 0; border-radius: 999px; padding: 0.48rem 0.82rem;
+        font-size: 0.74rem; font-weight: 700; font-family: inherit;
+      }
+      .btn-ghost { background: transparent; border: 1px solid currentColor; }
+      .chips { display: flex; gap: 0.35rem; flex-wrap: wrap; margin-top: 0.75rem; }
+      .chip { font-size: 0.66rem; padding: 0.24rem 0.5rem; border-radius: 999px; }
+      .codes {
+        padding: 0.65rem 1.1rem 0.95rem; font-size: 0.72rem; color: var(--mute);
+        border-top: 1px solid rgba(0,0,0,.05);
+      }
+      .codes code {
+        font-family: ui-monospace, monospace; background: #efe8de;
+        padding: 0.08rem 0.28rem; border-radius: 4px; color: #333;
+      }
+
+      .logo-stage {
+        min-height: 168px; display: grid; place-items: center; padding: 1.25rem 1rem;
+      }
+      .logo-mark { display: flex; align-items: center; gap: 0.75rem; }
+      .name {
+        font-family: "Syne", sans-serif; font-weight: 700;
+        letter-spacing: -0.03em; line-height: 1.05;
+      }
+      .sub {
+        display: block; font-size: 0.66rem; font-weight: 600;
+        letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.72; margin-top: 0.2rem;
+      }
+      .complete-logo-bar {
+        display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+        padding: 1.05rem 1rem; min-height: 92px;
+        border-bottom: 1px solid rgba(0,0,0,.05);
+      }
+      .match-note {
+        padding: 0.65rem 1.1rem 0.95rem; font-size: 0.78rem; color: var(--mute);
+        border-top: 1px solid rgba(0,0,0,.05);
+      }
+
+      /* Website palettes */
+      .p1 .side{background:#1c2430;color:#f2eee6}.p1 .main{background:linear-gradient(160deg,#f0ebe2,#dfe8e4);color:#1c2430}.p1 .btn-main{background:#c45c26;color:#fff}.p1 .btn-ghost{color:#1c2430;border-color:#1c2430}.p1 .chip{background:rgba(196,92,38,.14);color:#8a3d14}.p1 .s1{background:#1c2430}.p1 .s2{background:#c45c26}.p1 .s3{background:#dfe8e4}.p1 .s4{background:#f0ebe2}
+      .p2 .side{background:#243d36;color:#e8f2ee}.p2 .main{background:#ead7c3;color:#1b2a25}.p2 .btn-main{background:#1b2a25;color:#ead7c3}.p2 .btn-ghost{color:#243d36;border-color:#243d36}.p2 .chip{background:#d7c0a7;color:#243d36}.p2 .s1{background:#243d36}.p2 .s2{background:#ead7c3}.p2 .s3{background:#1b2a25}.p2 .s4{background:#7f9a90}
+      .p3 .side{background:#3a1f2a;color:#f6e9ee}.p3 .main{background:#12161c;color:#f0ebe4}.p3 .btn-main{background:#d8a15c;color:#12161c}.p3 .btn-ghost{color:#f0ebe4;border-color:rgba(240,235,228,.4)}.p3 .chip{background:rgba(216,161,92,.18);color:#e8c892}.p3 .s1{background:#12161c}.p3 .s2{background:#3a1f2a}.p3 .s3{background:#d8a15c}.p3 .s4{background:#f0ebe4}
+      .p4 .side{background:#2b3f5c;color:#eaf1fa}.p4 .main{background:#f3f0ea;color:#1e2a3a}.p4 .btn-main{background:#e07a5f;color:#fff}.p4 .btn-ghost{color:#2b3f5c;border-color:#2b3f5c}.p4 .chip{background:#e7ddd2;color:#2b3f5c}.p4 .s1{background:#2b3f5c}.p4 .s2{background:#e07a5f}.p4 .s3{background:#f3f0ea}.p4 .s4{background:#1e2a3a}
+      .p5 .side{background:#4a463f;color:#f4efe6}.p5 .main{background:#c5d5ce;color:#22201c}.p5 .btn-main{background:#22201c;color:#f4efe6}.p5 .btn-ghost{color:#22201c;border-color:#22201c}.p5 .chip{background:#aebfb7;color:#22201c}.p5 .s1{background:#4a463f}.p5 .s2{background:#c5d5ce}.p5 .s3{background:#22201c}.p5 .s4{background:#8a9e95}
+      .p6 .side{background:#5b2c2c;color:#f8eaea}.p6 .main{background:linear-gradient(145deg,#f2e6d8,#d9c4a8);color:#2a1713}.p6 .btn-main{background:#5b2c2c;color:#fff}.p6 .btn-ghost{color:#5b2c2c;border-color:#5b2c2c}.p6 .chip{background:#e2ceb6;color:#5b2c2c}.p6 .s1{background:#5b2c2c}.p6 .s2{background:#f2e6d8}.p6 .s3{background:#2a1713}.p6 .s4{background:#d9c4a8}
+      .p7 .side{background:#163a3a;color:#e5f4f2}.p7 .main{background:#f2ebe1;color:#122828}.p7 .btn-main{background:#d97706;color:#fff}.p7 .btn-ghost{color:#163a3a;border-color:#163a3a}.p7 .chip{background:#e7d7c2;color:#163a3a}.p7 .s1{background:#163a3a}.p7 .s2{background:#d97706}.p7 .s3{background:#f2ebe1}.p7 .s4{background:#2f6b66}
+      .p8 .side{background:#221c2e;color:#efeaf6}.p8 .main{background:#d8e2d0;color:#1b1a17}.p8 .btn-main{background:#221c2e;color:#efeaf6}.p8 .btn-ghost{color:#221c2e;border-color:#221c2e}.p8 .chip{background:#bfcbb5;color:#221c2e}.p8 .s1{background:#221c2e}.p8 .s2{background:#d8e2d0}.p8 .s3{background:#efeaf6}.p8 .s4{background:#6d7a63}
+      .p9 .side{background:#0f2744;color:#e8f0fa}.p9 .main{background:#f6e7d8;color:#142033}.p9 .btn-main{background:#0f2744;color:#fff}.p9 .btn-ghost{color:#0f2744;border-color:#0f2744}.p9 .chip{background:#e6d2bd;color:#0f2744}.p9 .s1{background:#0f2744}.p9 .s2{background:#f6e7d8}.p9 .s3{background:#c9832a}.p9 .s4{background:#142033}
+      .p10 .side{background:#2f2a26;color:#f3ebe3}.p10 .main{background:#9eb7b0;color:#1c1917}.p10 .btn-main{background:#c45c26;color:#fff}.p10 .btn-ghost{color:#1c1917;border-color:#1c1917}.p10 .chip{background:#87a19a;color:#1c1917}.p10 .s1{background:#2f2a26}.p10 .s2{background:#9eb7b0}.p10 .s3{background:#c45c26}.p10 .s4{background:#f3ebe3}
+      .p11 .side{background:#1e3d2f;color:#e9f5ee}.p11 .main{background:#efe6f2;color:#1a1a1a}.p11 .btn-main{background:#1e3d2f;color:#fff}.p11 .btn-ghost{color:#1e3d2f;border-color:#1e3d2f}.p11 .chip{background:#dccfe3;color:#3a2a45}.p11 .s1{background:#1e3d2f}.p11 .s2{background:#efe6f2}.p11 .s3{background:#6b4e71}.p11 .s4{background:#e9f5ee}
+      .p12 .side{background:#402218;color:#f8ece5}.p12 .main{background:#d7dde8;color:#1d2430}.p12 .btn-main{background:#402218;color:#fff}.p12 .btn-ghost{color:#402218;border-color:#402218}.p12 .chip{background:#c3cad8;color:#1d2430}.p12 .s1{background:#402218}.p12 .s2{background:#d7dde8}.p12 .s3{background:#8b5a3c}.p12 .s4{background:#f8ece5}
+      .p13 .side{background:#1a2e28;color:#e8f4ef}.p13 .main{background:#f5e9d4;color:#1a2e28}.p13 .btn-main{background:#c4784a;color:#fff}.p13 .btn-ghost{color:#1a2e28;border-color:#1a2e28}.p13 .chip{background:#e8d4b8;color:#5a3a22}.p13 .s1{background:#1a2e28}.p13 .s2{background:#c4784a}.p13 .s3{background:#f5e9d4}.p13 .s4{background:#e8f4ef}
+      .p14 .side{background:#2c1e3a;color:#f2eaf8}.p14 .main{background:#e8f0f5;color:#1e2430}.p14 .btn-main{background:#2c1e3a;color:#fff}.p14 .btn-ghost{color:#2c1e3a;border-color:#2c1e3a}.p14 .chip{background:#d4e0ea;color:#2c1e3a}.p14 .s1{background:#2c1e3a}.p14 .s2{background:#e8f0f5}.p14 .s3{background:#7a5a9a}.p14 .s4{background:#f2eaf8}
+      .p15 .side{background:#1f2a1f;color:#eef4ee}.p15 .main{background:#f0d9c8;color:#1f2a1f}.p15 .btn-main{background:#b85c38;color:#fff}.p15 .btn-ghost{color:#1f2a1f;border-color:#1f2a1f}.p15 .chip{background:#e4c4ae;color:#5a3020}.p15 .s1{background:#1f2a1f}.p15 .s2{background:#b85c38}.p15 .s3{background:#f0d9c8}.p15 .s4{background:#eef4ee}
+      .p16 .side{background:#1c2838;color:#e8eef6}.p16 .main{background:#e6ddd0;color:#1c2838}.p16 .btn-main{background:#3d6b8c;color:#fff}.p16 .btn-ghost{color:#1c2838;border-color:#1c2838}.p16 .chip{background:#d4cbbd;color:#1c2838}.p16 .s1{background:#1c2838}.p16 .s2{background:#3d6b8c}.p16 .s3{background:#e6ddd0}.p16 .s4{background:#e8eef6}
+      .p17 .side{background:#3d2a1f;color:#f8efe6}.p17 .main{background:#dce8e0;color:#2a1f18}.p17 .btn-main{background:#3d2a1f;color:#fff}.p17 .btn-ghost{color:#3d2a1f;border-color:#3d2a1f}.p17 .chip{background:#c5d4c9;color:#3d2a1f}.p17 .s1{background:#3d2a1f}.p17 .s2{background:#dce8e0}.p17 .s3{background:#8a6a4a}.p17 .s4{background:#f8efe6}
+      .p18 .side{background:#14222e;color:#e6f0f8}.p18 .main{background:#f4ebe3;color:#14222e}.p18 .btn-main{background:#c45c4a;color:#fff}.p18 .btn-ghost{color:#14222e;border-color:#14222e}.p18 .chip{background:#e6d8cc;color:#5a3028}.p18 .s1{background:#14222e}.p18 .s2{background:#c45c4a}.p18 .s3{background:#f4ebe3}.p18 .s4{background:#e6f0f8}
+
+      .live-studio {
+        display: grid;
+        gap: 1.1rem;
+      }
+      @media (min-width: 900px) {
+        .live-studio {
+          grid-template-columns: 0.9fr 1.2fr;
+          align-items: start;
+        }
+      }
+      .live-controls, .live-preview-wrap {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--line);
+        border-radius: 1.25rem;
+        padding: 1.1rem;
+      }
+      .live-controls h3, .live-preview-wrap h3 {
+        margin: 0 0 0.85rem;
+        font-family: "Syne", sans-serif;
+        font-size: 1.05rem;
+        letter-spacing: -0.02em;
+      }
+      .color-row {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 0.55rem;
+        align-items: center;
+        margin-bottom: 0.7rem;
+      }
+      .color-row label {
+        font-size: 0.84rem;
+        color: var(--mute);
+      }
+      .color-row input[type="color"] {
+        width: 2.4rem;
+        height: 2.4rem;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+      .color-row input[type="text"] {
+        width: 6.2rem;
+        border: 1px solid var(--line);
+        background: rgba(0,0,0,0.25);
+        color: var(--ink);
+        border-radius: 0.55rem;
+        padding: 0.45rem 0.5rem;
+        font-family: ui-monospace, monospace;
+        font-size: 0.78rem;
+      }
+      .preset-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        margin-top: 0.85rem;
+      }
+      .preset {
+        border: 1px solid var(--line);
+        background: rgba(244,239,231,0.06);
+        color: var(--ink);
+        border-radius: 999px;
+        padding: 0.4rem 0.7rem;
+        font-size: 0.75rem;
+        cursor: pointer;
+      }
+      .preset:hover { border-color: var(--ember); }
+      .live-preview {
+        min-height: 280px;
+        display: grid;
+        grid-template-columns: 0.9fr 1.2fr;
+        border-radius: 1rem;
+        overflow: hidden;
+      }
+      .live-logo-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 1rem;
+        padding: 0.9rem;
+        border-radius: 0.9rem;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+      .live-preview .side,
+      .live-preview .main {
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+      .live-preview .btn {
+        transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      }
+      .copy-palette {
+        margin-top: 0.85rem;
+        width: 100%;
+        border: 0;
+        border-radius: 999px;
+        min-height: 2.7rem;
+        background: var(--ember);
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      @media (max-width: 560px) {
+        .preview { grid-template-columns: 1fr; min-height: 0; }
+        .side { min-height: 110px; }
+        .tabs { grid-template-columns: 1fr 1fr; }
+        .tab { min-height: 4.4rem; }
+        .topbar-note { display: none; }
+        .live-preview { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="topbar">
+        <a class="back" href="index.html">
+          <span class="back-mark" aria-hidden="true">←</span>
+          Adored
+        </a>
+        <span class="topbar-note">Design samples</span>
+      </div>
+
+      <div class="chooser">
+        <div class="tabs" role="tablist" aria-label="Sample type">
+          <button class="tab" type="button" data-tab="website" role="tab" aria-selected="false">
+            <span class="tab-kicker">01</span>
+            <span class="tab-label">Website</span>
+            <span class="tab-hint">Color & layout directions</span>
+          </button>
+          <button class="tab" type="button" data-tab="logo" role="tab" aria-selected="false">
+            <span class="tab-kicker">02</span>
+            <span class="tab-label">Logo</span>
+            <span class="tab-hint">Marks & wordmarks</span>
+          </button>
+          <button class="tab" type="button" data-tab="combo" role="tab" aria-selected="false">
+            <span class="tab-kicker">03</span>
+            <span class="tab-label">Combinations</span>
+            <span class="tab-hint">Matched full sets</span>
+          </button>
+          <button class="tab" type="button" data-tab="live" role="tab" aria-selected="false">
+            <span class="tab-kicker">04</span>
+            <span class="tab-label">Live colors</span>
+            <span class="tab-hint">Pick & preview live</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="empty is-visible" id="empty-state" aria-live="polite">
+        <strong>Choose a lane</strong>
+        Pick Website, Logo, Combinations, or Live colors.
+      </div>
+
+      <!-- WEBSITE -->
+      <section id="panel-website" class="panel" role="tabpanel" hidden>
+        <div class="sample-slider" data-slider="website">
+          <div class="sample-slider-viewport">
+            <div class="sample-slider-track" id="website-track"></div>
+          </div>
+          <div class="sample-slider-bar">
+            <div class="sample-slider-dots" id="website-dots" role="tablist" aria-label="Website samples"></div>
+            <div class="sample-slider-nav">
+              <button class="sample-nav-btn" type="button" data-prev aria-label="Previous sample">‹</button>
+              <button class="sample-nav-btn" type="button" data-next aria-label="Next sample">›</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LOGO -->
+      <section id="panel-logo" class="panel" role="tabpanel" hidden>
+        <div class="sample-slider" data-slider="logo">
+          <div class="sample-slider-viewport">
+            <div class="sample-slider-track" id="logo-track"></div>
+          </div>
+          <div class="sample-slider-bar">
+            <div class="sample-slider-dots" id="logo-dots" role="tablist" aria-label="Logo samples"></div>
+            <div class="sample-slider-nav">
+              <button class="sample-nav-btn" type="button" data-prev aria-label="Previous sample">‹</button>
+              <button class="sample-nav-btn" type="button" data-next aria-label="Next sample">›</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMBINATIONS -->
+      <section id="panel-combo" class="panel" role="tabpanel" hidden>
+        <div class="sample-slider" data-slider="combo">
+          <div class="sample-slider-viewport">
+            <div class="sample-slider-track" id="combo-track"></div>
+          </div>
+          <div class="sample-slider-bar">
+            <div class="sample-slider-dots" id="combo-dots" role="tablist" aria-label="Combination samples"></div>
+            <div class="sample-slider-nav">
+              <button class="sample-nav-btn" type="button" data-prev aria-label="Previous sample">‹</button>
+              <button class="sample-nav-btn" type="button" data-next aria-label="Next sample">›</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LIVE -->
+      <section id="panel-live" class="panel" role="tabpanel" hidden>
+        <div class="live-studio">
+          <div class="live-controls">
+            <h3>Live color palette</h3>
+            <div class="color-row">
+              <label for="c-side">Sidebar / dark</label>
+              <input id="c-side" type="color" value="#1C2430" data-key="side" />
+              <input id="t-side" type="text" value="#1C2430" data-key="side" />
+            </div>
+            <div class="color-row">
+              <label for="c-accent">Button / accent</label>
+              <input id="c-accent" type="color" value="#C45C26" data-key="accent" />
+              <input id="t-accent" type="text" value="#C45C26" data-key="accent" />
+            </div>
+            <div class="color-row">
+              <label for="c-main">Main background</label>
+              <input id="c-main" type="color" value="#F0EBE2" data-key="main" />
+              <input id="t-main" type="text" value="#F0EBE2" data-key="main" />
+            </div>
+            <div class="color-row">
+              <label for="c-text">Text</label>
+              <input id="c-text" type="color" value="#1C2430" data-key="text" />
+              <input id="t-text" type="text" value="#1C2430" data-key="text" />
+            </div>
+            <div class="preset-row" id="preset-row"></div>
+            <button class="copy-palette" type="button" id="copy-palette">Copy palette hex codes</button>
+          </div>
+          <div class="live-preview-wrap">
+            <h3>Live preview</h3>
+            <div class="live-preview" id="live-preview">
+              <div class="side" id="live-side">
+                <div class="brand">Your Business</div>
+                <ul class="side-nav"><li>Services</li><li>About</li><li>Contact</li></ul>
+              </div>
+              <div class="main" id="live-main">
+                <div>
+                  <h3 class="hero-title" id="live-title">Clear online presence for your services.</h3>
+                  <p class="hero-text" id="live-text">Simple, trustworthy, easy to update.</p>
+                  <div class="actions">
+                    <button class="btn" id="live-btn" type="button">Call now</button>
+                    <button class="btn btn-ghost" id="live-ghost" type="button">Services</button>
+                  </div>
+                </div>
+                <div class="chips">
+                  <span class="chip" id="live-chip1">Services</span>
+                  <span class="chip" id="live-chip2">Contact</span>
+                </div>
+              </div>
+            </div>
+            <div class="live-logo-row" id="live-logo-row">
+              <svg id="live-logo-svg" width="54" height="54" viewBox="0 0 64 64" aria-hidden="true">
+                <rect id="live-logo-bg" width="64" height="64" rx="16" fill="#1C2430"/>
+                <path id="live-logo-arc" d="M12 40 C24 18 40 18 52 40" fill="none" stroke="#C45C26" stroke-width="4" stroke-linecap="round"/>
+                <text x="32" y="44" text-anchor="middle" fill="#F0EBE2" font-family="Syne, sans-serif" font-size="18" font-weight="700">SV</text>
+              </svg>
+              <div>
+                <div class="name" style="font-size:1.2rem" id="live-logo-name">Brand Co</div>
+                <span class="sub" id="live-logo-sub">Live palette</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <script>
+      /* [id, title, desc, cssClass, swatches, live=[side, accent, main, text]] */
+      const sites = [
+        ["1", "Ink & ember", "Dark slate + copper accent — official, not default navy.", "p1", ["#1C2430","#C45C26","#DFE8E4","#F0EBE2"], ["#1C2430","#C45C26","#F0EBE2","#1C2430"]],
+        ["2", "Pine & sand", "Deep green on warm sand — grounded and current.", "p2", ["#243D36","#EAD7C3","#1B2A25","#7F9A90"], ["#243D36","#1B2A25","#EAD7C3","#1B2A25"]],
+        ["3", "Noir atelier", "Near-black with plum edge and brass — premium and uncommon.", "p3", ["#12161C","#3A1F2A","#D8A15C","#F0EBE4"], ["#3A1F2A","#D8A15C","#12161C","#F0EBE4"]],
+        ["4", "Coastal steel", "Steel blue with coral action — lively but trustworthy.", "p4", ["#2B3F5C","#E07A5F","#F3F0EA","#1E2A3A"], ["#2B3F5C","#E07A5F","#F3F0EA","#1E2A3A"]],
+        ["5", "Stone & moss", "Muted stone with moss panels — quiet editorial feel.", "p5", ["#4A463F","#C5D5CE","#22201C","#8A9E95"], ["#4A463F","#22201C","#C5D5CE","#22201C"]],
+        ["6", "Clay archive", "Deep clay red with parchment tones — distinctive and formal.", "p6", ["#5B2C2C","#F2E6D8","#2A1713","#D9C4A8"], ["#5B2C2C","#5B2C2C","#F2E6D8","#2A1713"]],
+        ["7", "Teal & amber", "Deep teal with amber CTA — precise and unexpected.", "p7", ["#163A3A","#D97706","#F2EBE1","#2F6B66"], ["#163A3A","#D97706","#F2EBE1","#122828"]],
+        ["8", "Violet dusk & leaf", "Dusk violet with leaf green — composed and rare.", "p8", ["#221C2E","#D8E2D0","#EFEAF6","#6D7A63"], ["#221C2E","#221C2E","#D8E2D0","#1B1A17"]],
+        ["9", "Harbor night", "Deep harbor blue with apricot paper — coastal and serious.", "p9", ["#0F2744","#F6E7D8","#C9832A","#142033"], ["#0F2744","#0F2744","#F6E7D8","#142033"]],
+        ["10", "Espresso mint", "Espresso brown with mint field and copper CTA.", "p10", ["#2F2A26","#9EB7B0","#C45C26","#F3EBE3"], ["#2F2A26","#C45C26","#9EB7B0","#1C1917"]],
+        ["11", "Garden dusk", "Forest green with soft lilac paper — soft contrast, still official.", "p11", ["#1E3D2F","#EFE6F2","#6B4E71","#E9F5EE"], ["#1E3D2F","#1E3D2F","#EFE6F2","#1A1A1A"]],
+        ["12", "Cedar frost", "Cedar brown with cool frost blue-grey — warm/cool tension.", "p12", ["#402218","#D7DDE8","#8B5A3C","#F8ECE5"], ["#402218","#402218","#D7DDE8","#1D2430"]],
+        ["13", "Olive apricot", "Deep olive with apricot CTA — warm studio energy.", "p13", ["#1A2E28","#C4784A","#F5E9D4","#E8F4EF"], ["#1A2E28","#C4784A","#F5E9D4","#1A2E28"]],
+        ["14", "Plum frost", "Plum sidebar with cool paper — soft contrast, still formal.", "p14", ["#2C1E3A","#E8F0F5","#7A5A9A","#F2EAF8"], ["#2C1E3A","#2C1E3A","#E8F0F5","#1E2430"]],
+        ["15", "Fern terracotta", "Fern green with terracotta action — earthy and clear.", "p15", ["#1F2A1F","#B85C38","#F0D9C8","#EEF4EE"], ["#1F2A1F","#B85C38","#F0D9C8","#1F2A1F"]],
+        ["16", "Ink horizon", "Ink blue with horizon blue CTA — calm professional.", "p16", ["#1C2838","#3D6B8C","#E6DDD0","#E8EEF6"], ["#1C2838","#3D6B8C","#E6DDD0","#1C2838"]],
+        ["17", "Walnut sage", "Walnut brown with sage field — quiet and grounded.", "p17", ["#3D2A1F","#DCE8E0","#8A6A4A","#F8EFE6"], ["#3D2A1F","#3D2A1F","#DCE8E0","#2A1F18"]],
+        ["18", "Midnight coral", "Midnight navy with coral CTA — sharp and memorable.", "p18", ["#14222E","#C45C4A","#F4EBE3","#E6F0F8"], ["#14222E","#C45C4A","#F4EBE3","#14222E"]],
+      ];
+
+      const logos = [
+        ["A", "Arc monogram", "Horizon curve through initials — subtle motion through the mark.", "#f0ebe2", "#1c2430",
+          `<svg width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#1c2430"/><path d="M12 40 C24 18 40 18 52 40" fill="none" stroke="#c45c26" stroke-width="4" stroke-linecap="round"/><text x="32" y="44" text-anchor="middle" fill="#f0ebe2" font-family="Syne, sans-serif" font-size="18" font-weight="700">SV</text></svg>`, "Independent"],
+        ["B", "Split seal", "Two-tone badge — certified feel, not a boring template shield.", "#ead7c3", "#1b2a25",
+          `<svg width="70" height="70" viewBox="0 0 70 70"><circle cx="35" cy="35" r="32" fill="#243d36"/><path d="M35 3 A32 32 0 0 1 35 67 Z" fill="#1b2a25"/><text x="35" y="41" text-anchor="middle" fill="#ead7c3" font-family="Syne, sans-serif" font-size="18" font-weight="700">SV</text></svg>`, "On-site · Clear"],
+        ["C", "Folded report", "Folded page + soft path line — documents with a journey hint.", "#12161c", "#f0ebe4",
+          `<svg width="58" height="64" viewBox="0 0 58 64"><path d="M8 6 H36 L50 20 V58 H8 Z" fill="#3a1f2a"/><path d="M36 6 V20 H50" fill="none" stroke="#d8a15c" stroke-width="2"/><path d="M16 34 C24 28 34 40 42 34" fill="none" stroke="#d8a15c" stroke-width="2.8" stroke-linecap="round"/></svg>`, "Reports"],
+        ["D", "Orbit initials", "Open ring + accent node — precision / assessment energy.", "#f3f0ea", "#2b3f5c",
+          `<svg width="72" height="72" viewBox="0 0 72 72"><circle cx="36" cy="36" r="28" fill="none" stroke="#2b3f5c" stroke-width="3"/><circle cx="58" cy="22" r="5" fill="#e07a5f"/><text x="36" y="42" text-anchor="middle" fill="#2b3f5c" font-family="Syne, sans-serif" font-size="18" font-weight="700">SV</text></svg>`, "Measured"],
+        ["E", "Route slash", "Bold slash through the mark — direction and decision.", "#c5d5ce", "#22201c",
+          `<svg width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#4a463f"/><text x="30" y="42" text-anchor="middle" fill="#f4efe6" font-family="Syne, sans-serif" font-size="20" font-weight="700">SV</text><path d="M12 48 L52 16" stroke="#c5d5ce" stroke-width="4" stroke-linecap="round"/></svg>`, "Forward"],
+        ["F", "Twin track", "Two parallel curves — road-like, mostly graphic and elegant.", "#f2e6d8", "#5b2c2c",
+          `<svg width="70" height="48" viewBox="0 0 70 48"><path d="M4 16 C22 4 48 4 66 16" fill="none" stroke="#5b2c2c" stroke-width="3.5" stroke-linecap="round"/><path d="M4 32 C22 20 48 20 66 32" fill="none" stroke="#a56a4e" stroke-width="3.5" stroke-linecap="round"/></svg>`, "Path · Clarity"],
+        ["G", "Stacked signal", "Editorial stacked type with signal bars.", "#f2ebe1", "#163a3a",
+          `<div style="text-align:left;color:#163a3a"><div class="name" style="font-size:1.8rem">SV</div><div class="name" style="font-size:1.05rem;margin-top:.12rem">Studio</div><div style="display:flex;gap:4px;margin-top:.55rem"><span style="width:18px;height:4px;background:#d97706;border-radius:99px"></span><span style="width:10px;height:4px;background:#2f6b66;border-radius:99px"></span><span style="width:6px;height:4px;background:#163a3a;border-radius:99px;opacity:.35"></span></div></div>`, ""],
+        ["H", "Asymmetric frame", "Open corner frame — architectural and uncommon.", "#d8e2d0", "#221c2e",
+          `<svg width="68" height="68" viewBox="0 0 68 68"><path d="M8 20 V8 H20" fill="none" stroke="#221c2e" stroke-width="3.5"/><path d="M48 60 H60 V48" fill="none" stroke="#6d7a63" stroke-width="3.5"/><text x="34" y="40" text-anchor="middle" fill="#221c2e" font-family="Syne, sans-serif" font-size="20" font-weight="700">SV</text></svg>`, "Structured"],
+        ["I", "Ribbon seal", "Soft ribbon cut through a dark disc — ceremonial but modern.", "#f6e7d8", "#0f2744",
+          `<svg width="70" height="70" viewBox="0 0 70 70"><circle cx="35" cy="35" r="30" fill="#0f2744"/><path d="M8 34 H62" stroke="#c9832a" stroke-width="8"/><text x="35" y="41" text-anchor="middle" fill="#f6e7d8" font-family="Syne, sans-serif" font-size="18" font-weight="700">SV</text></svg>`, "Certified"],
+        ["J", "Negative notch", "Cut-out notch suggests a path into the mark.", "#9eb7b0", "#2f2a26",
+          `<svg width="64" height="64" viewBox="0 0 64 64"><path d="M8 8 H56 V56 H8 Z" fill="#2f2a26"/><path d="M56 8 L40 24 L56 40" fill="#9eb7b0"/><text x="28" y="40" text-anchor="middle" fill="#f3ebe3" font-family="Syne, sans-serif" font-size="18" font-weight="700">SV</text></svg>`, "Direct"],
+        ["K", "Wave bar", "Soft wave under bold initials — calm movement.", "#efe6f2", "#1e3d2f",
+          `<svg width="88" height="64" viewBox="0 0 88 64"><text x="44" y="34" text-anchor="middle" fill="#1e3d2f" font-family="Syne, sans-serif" font-size="28" font-weight="700">SV</text><path d="M12 46 C28 36 40 56 76 42" fill="none" stroke="#6b4e71" stroke-width="3.5" stroke-linecap="round"/></svg>`, "Flow"],
+        ["L", "Bracket mark", "Technical brackets around SV — inspection / measurement vibe.", "#d7dde8", "#402218",
+          `<svg width="78" height="58" viewBox="0 0 78 58"><path d="M14 10 H8 V48 H14" fill="none" stroke="#402218" stroke-width="3.5"/><path d="M64 10 H70 V48 H64" fill="none" stroke="#8b5a3c" stroke-width="3.5"/><text x="39" y="36" text-anchor="middle" fill="#402218" font-family="Syne, sans-serif" font-size="22" font-weight="700">SV</text></svg>`, "Inspect"],
+        ["M", "Layered diamond", "Layered diamond badge — sharp and collectible.", "#1c2430", "#f0ebe2",
+          `<svg width="70" height="70" viewBox="0 0 70 70"><path d="M35 4 L66 35 L35 66 L4 35 Z" fill="#c45c26"/><path d="M35 14 L56 35 L35 56 L14 35 Z" fill="#1c2430"/><text x="35" y="40" text-anchor="middle" fill="#f0ebe2" font-family="Syne, sans-serif" font-size="14" font-weight="700">SV</text></svg>`, "Mark"],
+        ["N", "Soft capsule", "Capsule wordmark — friendly modern office identity.", "#ead7c3", "#243d36",
+          `<svg width="150" height="52" viewBox="0 0 150 52"><rect width="150" height="52" rx="26" fill="#243d36"/><text x="75" y="33" text-anchor="middle" fill="#ead7c3" font-family="Syne, sans-serif" font-size="18" font-weight="700">Brand Co</text></svg>`, ""],
+        ["O", "Rising hatch", "Diagonal hatch field behind initials — textured and bold.", "#f0ebe4", "#3a1f2a",
+          `<svg width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="#3a1f2a"/><path d="M10 50 L50 10 M18 58 L58 18 M2 42 L42 2" stroke="#d8a15c" stroke-width="2" opacity=".55"/><text x="32" y="40" text-anchor="middle" fill="#f0ebe4" font-family="Syne, sans-serif" font-size="18" font-weight="700">SV</text></svg>`, "Craft"],
+        ["P", "Dot trail", "Trailing dots suggest a route / process steps.", "#f3f0ea", "#2b3f5c",
+          `<svg width="90" height="54" viewBox="0 0 90 54"><text x="8" y="34" fill="#2b3f5c" font-family="Syne, sans-serif" font-size="24" font-weight="700">SV</text><circle cx="52" cy="28" r="4" fill="#e07a5f"/><circle cx="66" cy="28" r="3.2" fill="#e07a5f" opacity=".7"/><circle cx="78" cy="28" r="2.4" fill="#e07a5f" opacity=".4"/></svg>`, "Process"],
+        ["Q", "Hex stamp", "Hexagon stamp — technical and stamp-like.", "#f5e9d4", "#1a2e28",
+          `<svg width="70" height="70" viewBox="0 0 70 70"><path d="M35 6 L60 20 V50 L35 64 L10 50 V20 Z" fill="#1a2e28"/><path d="M35 14 L53 24 V46 L35 56 L17 46 V24 Z" fill="none" stroke="#c4784a" stroke-width="2.5"/><text x="35" y="40" text-anchor="middle" fill="#f5e9d4" font-family="Syne, sans-serif" font-size="16" font-weight="700">SV</text></svg>`, "Stamp"],
+        ["R", "Crosshair", "Soft crosshair — measurement without looking like a target logo.", "#e8f0f5", "#2c1e3a",
+          `<svg width="72" height="72" viewBox="0 0 72 72"><circle cx="36" cy="36" r="26" fill="none" stroke="#2c1e3a" stroke-width="2.5"/><path d="M36 8 V18 M36 54 V64 M8 36 H18 M54 36 H64" stroke="#7a5a9a" stroke-width="2.5" stroke-linecap="round"/><text x="36" y="41" text-anchor="middle" fill="#2c1e3a" font-family="Syne, sans-serif" font-size="16" font-weight="700">SV</text></svg>`, "Precise"],
+        ["S", "Book fold", "Open book fold — reports and documentation first.", "#f0d9c8", "#1f2a1f",
+          `<svg width="78" height="58" viewBox="0 0 78 58"><path d="M8 10 H36 V50 H8 Z" fill="#1f2a1f"/><path d="M42 10 H70 V50 H42 Z" fill="#b85c38"/><path d="M39 10 V50" stroke="#f0d9c8" stroke-width="3"/><text x="22" y="36" text-anchor="middle" fill="#eef4ee" font-family="Syne, sans-serif" font-size="12" font-weight="700">SV</text></svg>`, "Docs"],
+        ["T", "Pillar mark", "Three pillars — stability and structure.", "#e6ddd0", "#1c2838",
+          `<svg width="70" height="64" viewBox="0 0 70 64"><rect x="10" y="18" width="10" height="34" rx="2" fill="#1c2838"/><rect x="30" y="10" width="10" height="42" rx="2" fill="#3d6b8c"/><rect x="50" y="22" width="10" height="30" rx="2" fill="#1c2838" opacity=".65"/><text x="35" y="60" text-anchor="middle" fill="#1c2838" font-family="Syne, sans-serif" font-size="10" font-weight="700">SV</text></svg>`, "Solid"],
+        ["U", "Corner leaf", "Corner leaf accent — soft nature cue.", "#dce8e0", "#3d2a1f",
+          `<svg width="68" height="68" viewBox="0 0 68 68"><rect width="68" height="68" rx="14" fill="#3d2a1f"/><path d="M48 12 C58 28 52 48 34 56 C42 40 40 24 48 12 Z" fill="#8a6a4a"/><text x="28" y="40" text-anchor="middle" fill="#f8efe6" font-family="Syne, sans-serif" font-size="18" font-weight="700">SV</text></svg>`, "Natural"],
+        ["V", "Horizon bar", "Wide horizon bar under wordmark — landscape calm.", "#f4ebe3", "#14222e",
+          `<svg width="140" height="56" viewBox="0 0 140 56"><text x="70" y="28" text-anchor="middle" fill="#14222e" font-family="Syne, sans-serif" font-size="22" font-weight="700">Brand Co</text><rect x="28" y="38" width="84" height="5" rx="2.5" fill="#c45c4a"/></svg>`, ""],
+        ["W", "Nested squares", "Nested squares — structured systems thinking.", "#e8f4ef", "#1a2e28",
+          `<svg width="64" height="64" viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="8" fill="none" stroke="#1a2e28" stroke-width="3"/><rect x="16" y="16" width="32" height="32" rx="6" fill="#c4784a"/><text x="32" y="38" text-anchor="middle" fill="#e8f4ef" font-family="Syne, sans-serif" font-size="14" font-weight="700">SV</text></svg>`, "Systems"],
+        ["X", "Signal arc", "Arc + node — signal / connection energy.", "#f2eaf8", "#2c1e3a",
+          `<svg width="72" height="64" viewBox="0 0 72 64"><path d="M10 48 C24 18 48 18 62 48" fill="none" stroke="#2c1e3a" stroke-width="3.5" stroke-linecap="round"/><circle cx="36" cy="28" r="5" fill="#7a5a9a"/><text x="36" y="56" text-anchor="middle" fill="#2c1e3a" font-family="Syne, sans-serif" font-size="12" font-weight="700">SV</text></svg>`, "Connect"],
+      ];
+
+      const combos = [
+        [1,0,"Ink & ember set","Warm copper on dark official base."],
+        [2,1,"Pine & sand set","Natural and current — grounded and calm."],
+        [3,2,"Noir atelier set","Dark editorial premium."],
+        [4,3,"Coastal steel set","Cool + warm contrast."],
+        [5,4,"Stone & moss set","Quiet creative direction."],
+        [6,5,"Clay archive set","Warm and rare for this industry."],
+        [7,6,"Teal & amber set","Sharp amber actions on deep teal."],
+        [8,7,"Violet dusk set","Unexpected pairing, architectural mark."],
+        [9,8,"Harbor night set","Coastal night blue with apricot ribbon seal."],
+        [10,9,"Espresso mint set","Espresso + mint with a notched mark."],
+        [11,10,"Garden dusk set","Forest and lilac with a soft wave."],
+        [12,11,"Cedar frost set","Cedar warmth with frost brackets."],
+        [1,12,"Ember diamond set","Copper diamond on ink & ember colors."],
+        [2,13,"Pine capsule set","Soft capsule wordmark on pine & sand."],
+        [3,14,"Atelier hatch set","Textured hatch badge on noir colors."],
+        [4,15,"Steel trail set","Dot-trail process mark on coastal steel."],
+        [13,16,"Olive hex set","Olive apricot with hex stamp mark."],
+        [14,17,"Plum crosshair set","Plum frost with soft crosshair."],
+        [15,18,"Fern book set","Fern terracotta with book-fold mark."],
+        [16,19,"Horizon pillar set","Ink horizon with pillar structure."],
+        [17,20,"Walnut leaf set","Walnut sage with corner leaf."],
+        [18,21,"Midnight bar set","Midnight coral with horizon bar wordmark."],
+        [13,22,"Olive systems set","Nested squares on olive apricot."],
+        [14,23,"Plum signal set","Signal arc on plum frost."],
+      ];
+
+      function siteCard([id, title, desc, cls, codes], compact = false) {
+        return `<article class="card ${cls}">
+          <div class="card-meta"><div class="tag">Website ${id}</div><h2>${title}</h2><p>${desc}</p></div>
+          <div class="swatches"><div class="swatch s1"></div><div class="swatch s2"></div><div class="swatch s3"></div><div class="swatch s4"></div></div>
+          <div class="preview" style="${compact ? "min-height:210px" : ""}">
+            <div class="side"><div class="brand">Your Business</div><ul class="side-nav"><li>Services</li><li>About</li><li>Contact</li></ul></div>
+            <div class="main"><div>
+              <h3 class="hero-title">Clear online presence for your services.</h3>
+              <p class="hero-text">A clear online presence for your services — simple, trustworthy, easy to update.</p>
+              <div class="actions"><button class="btn btn-main">Call now</button><button class="btn btn-ghost">Services</button></div>
+            </div><div class="chips"><span class="chip">Services</span><span class="chip">Contact</span></div></div>
+          </div>
+          <div class="codes">${codes.map(c => `<code>${c}</code>`).join(" ")}</div>
+        </article>`;
+      }
+
+      function logoCard([id, title, desc, bg, fg, mark, sub]) {
+        return `<article class="card">
+          <div class="card-meta"><div class="tag">Logo ${id}</div><h2>${title}</h2><p>${desc}</p></div>
+          <div class="logo-stage" style="background:${bg}">
+            <div class="logo-mark" style="color:${fg}">
+              ${mark}
+              ${sub ? `<div><div class="name" style="font-size:1.28rem">Brand Co</div><span class="sub">${sub}</span></div>` : ""}
+            </div>
+          </div>
+        </article>`;
+      }
+
+      function comboCard([siteIdx, logoIdx, title, note], i) {
+        const site = sites[siteIdx - 1];
+        const logo = logos[logoIdx];
+        const [, , , cls] = site;
+        const [, , , bg, fg, mark, sub] = logo;
+        return `<article class="card">
+          <div class="card-meta"><div class="tag">Combination ${i + 1}</div><h2>${title}</h2><p>Website ${site[0]} + Logo ${logo[0]}</p></div>
+          <div class="complete-logo-bar" style="background:${bg};color:${fg}">
+            ${mark}
+            ${sub ? `<div><div class="name" style="font-size:1.2rem">Brand Co</div><span class="sub">${sub}</span></div>` : ""}
+          </div>
+          <div class="preview ${cls}" style="min-height:210px">
+            <div class="side"><div class="brand">Your Business</div><ul class="side-nav"><li>Services</li><li>About</li><li>Contact</li></ul></div>
+            <div class="main"><div>
+              <h3 class="hero-title">Clear online presence for your services.</h3>
+              <p class="hero-text">A clear online presence for your services — simple, trustworthy, easy to update.</p>
+              <div class="actions"><button class="btn btn-main">Call now</button><button class="btn btn-ghost">Services</button></div>
+            </div><div class="chips"><span class="chip">Services</span><span class="chip">Contact</span></div></div>
+          </div>
+          <div class="match-note">${note}</div>
+        </article>`;
+      }
+
+      /* —— Manual slidable samples (arrows + dashes, no autoplay) —— */
+      function buildSlider(name, htmlSlides) {
+        const root = document.querySelector(`[data-slider="${name}"]`);
+        const track = document.getElementById(`${name}-track`);
+        const dotsWrap = document.getElementById(`${name}-dots`);
+        const prevBtn = root.querySelector("[data-prev]");
+        const nextBtn = root.querySelector("[data-next]");
+        let index = 0;
+        const total = htmlSlides.length;
+
+        track.innerHTML = htmlSlides.map((html) => `<div class="sample-slide">${html}</div>`).join("");
+        dotsWrap.innerHTML = htmlSlides
+          .map((_, i) => `<button class="sample-dot" type="button" data-dot="${i}" aria-label="Go to sample ${i + 1}"></button>`)
+          .join("");
+
+        const dots = [...dotsWrap.querySelectorAll(".sample-dot")];
+
+        function goTo(next) {
+          index = (next + total) % total;
+          track.style.transform = `translateX(-${index * 100}%)`;
+          dots.forEach((dot, i) => dot.classList.toggle("is-active", i === index));
+          prevBtn.disabled = false;
+          nextBtn.disabled = false;
+        }
+
+        prevBtn.addEventListener("click", () => goTo(index - 1));
+        nextBtn.addEventListener("click", () => goTo(index + 1));
+        dotsWrap.addEventListener("click", (e) => {
+          const dot = e.target.closest("[data-dot]");
+          if (!dot) return;
+          goTo(Number(dot.dataset.dot));
+        });
+
+        let touchX = null;
+        track.addEventListener(
+          "touchstart",
+          (e) => {
+            touchX = e.changedTouches[0].clientX;
+          },
+          { passive: true }
+        );
+        track.addEventListener(
+          "touchend",
+          (e) => {
+            if (touchX == null) return;
+            const dx = e.changedTouches[0].clientX - touchX;
+            touchX = null;
+            if (Math.abs(dx) < 40) return;
+            goTo(dx < 0 ? index + 1 : index - 1);
+          },
+          { passive: true }
+        );
+
+        goTo(0);
+      }
+
+      buildSlider(
+        "website",
+        sites.map((s) => siteCard(s))
+      );
+      buildSlider(
+        "logo",
+        logos.map((l) => logoCard(l))
+      );
+      buildSlider(
+        "combo",
+        combos.map((c, i) => comboCard(c, i))
+      );
+
+      /* —— Live palette —— */
+      const palette = { side: "#1C2430", accent: "#C45C26", main: "#F0EBE2", text: "#1C2430" };
+
+      function normalizeHex(v) {
+        let h = String(v || "").trim();
+        if (!h.startsWith("#")) h = "#" + h;
+        if (/^#[0-9a-fA-F]{3}$/.test(h)) {
+          h = "#" + h[1] + h[1] + h[2] + h[2] + h[3] + h[3];
+        }
+        return /^#[0-9a-fA-F]{6}$/.test(h) ? h.toUpperCase() : null;
+      }
+
+      function applyLive() {
+        const { side, accent, main, text } = palette;
+        const sideEl = document.getElementById("live-side");
+        const mainEl = document.getElementById("live-main");
+        const btn = document.getElementById("live-btn");
+        const ghost = document.getElementById("live-ghost");
+        const chip1 = document.getElementById("live-chip1");
+        const chip2 = document.getElementById("live-chip2");
+        const logoRow = document.getElementById("live-logo-row");
+        const logoBg = document.getElementById("live-logo-bg");
+        const logoArc = document.getElementById("live-logo-arc");
+        const logoName = document.getElementById("live-logo-name");
+        const logoSub = document.getElementById("live-logo-sub");
+        const logoSvgText = document.querySelector("#live-logo-svg text");
+
+        sideEl.style.background = side;
+        sideEl.style.color = main;
+        mainEl.style.background = main;
+        mainEl.style.color = text;
+        btn.style.background = accent;
+        btn.style.color = "#fff";
+        ghost.style.background = "transparent";
+        ghost.style.color = text;
+        ghost.style.border = "1px solid " + text;
+        chip1.style.background = accent + "24";
+        chip1.style.color = text;
+        chip2.style.background = accent + "24";
+        chip2.style.color = text;
+        logoRow.style.background = main;
+        logoRow.style.color = text;
+        logoBg.setAttribute("fill", side);
+        logoArc.setAttribute("stroke", accent);
+        if (logoSvgText) logoSvgText.setAttribute("fill", main);
+        logoName.style.color = text;
+        logoSub.style.color = text;
+
+        document.getElementById("c-side").value = side;
+        document.getElementById("c-accent").value = accent;
+        document.getElementById("c-main").value = main;
+        document.getElementById("c-text").value = text;
+        document.getElementById("t-side").value = side;
+        document.getElementById("t-accent").value = accent;
+        document.getElementById("t-main").value = main;
+        document.getElementById("t-text").value = text;
+      }
+
+      function setPalette(side, accent, main, text) {
+        palette.side = normalizeHex(side) || palette.side;
+        palette.accent = normalizeHex(accent) || palette.accent;
+        palette.main = normalizeHex(main) || palette.main;
+        palette.text = normalizeHex(text) || palette.text;
+        applyLive();
+      }
+
+      document.getElementById("preset-row").innerHTML = sites.map((s) => {
+        const [, title, , , , live] = s;
+        const [side, accent, main, text] = live;
+        return `<button class="preset" type="button" data-side="${side}" data-accent="${accent}" data-main="${main}" data-text="${text}">${title}</button>`;
+      }).join("");
+
+      document.getElementById("preset-row").addEventListener("click", (e) => {
+        const btn = e.target.closest(".preset");
+        if (!btn) return;
+        setPalette(btn.dataset.side, btn.dataset.accent, btn.dataset.main, btn.dataset.text);
+      });
+
+      ["side", "accent", "main", "text"].forEach((key) => {
+        document.getElementById("c-" + key).addEventListener("input", (e) => {
+          palette[key] = e.target.value.toUpperCase();
+          applyLive();
+        });
+        document.getElementById("t-" + key).addEventListener("change", (e) => {
+          const hex = normalizeHex(e.target.value);
+          if (hex) {
+            palette[key] = hex;
+            applyLive();
+          } else {
+            e.target.value = palette[key];
+          }
+        });
+      });
+
+      document.getElementById("copy-palette").addEventListener("click", async () => {
+        const text = `Sidebar: ${palette.side}\nAccent: ${palette.accent}\nMain: ${palette.main}\nText: ${palette.text}`;
+        const btn = document.getElementById("copy-palette");
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.textContent = "Copied!";
+        } catch {
+          btn.textContent = "Copy failed — select manually";
+        }
+        setTimeout(() => { btn.textContent = "Copy palette hex codes"; }, 1600);
+      });
+
+      applyLive();
+
+      const tabs = [...document.querySelectorAll(".tab")];
+      const panels = {
+        website: document.getElementById("panel-website"),
+        logo: document.getElementById("panel-logo"),
+        combo: document.getElementById("panel-combo"),
+        live: document.getElementById("panel-live"),
+      };
+
+      function activate(name) {
+        tabs.forEach((tab) => {
+          const on = tab.dataset.tab === name;
+          tab.classList.toggle("is-active", on);
+          tab.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        Object.entries(panels).forEach(([key, panel]) => {
+          const on = key === name;
+          panel.classList.toggle("is-active", on);
+          panel.hidden = !on;
+        });
+        const empty = document.getElementById("empty-state");
+        if (empty) empty.classList.remove("is-visible");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      tabs.forEach((tab) => tab.addEventListener("click", () => activate(tab.dataset.tab)));
+    </script>
+  </body>
+</html>
