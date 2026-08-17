@@ -112,8 +112,9 @@ p {
 
 .logo-img {
   display: block;
-  height: 2.85rem;
+  height: 2.75rem;
   width: auto;
+  mix-blend-mode: lighten;
 }
 
 .nav {
@@ -207,13 +208,15 @@ p {
 }
 
 .hero-brand {
+  font-family: var(--font-script);
+  font-size: clamp(3.6rem, 10vw, 6.4rem);
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  letter-spacing: 0.03em;
+  line-height: 0.92;
   margin: 0 0 1.15rem;
-  line-height: 0;
-}
-
-.hero-brand .logo-img {
-  height: clamp(5.5rem, 18vw, 9.5rem);
-  width: auto;
+  white-space: nowrap;
 }
 
 .hero-title {
