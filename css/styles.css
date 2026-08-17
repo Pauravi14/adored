@@ -236,7 +236,7 @@ p {
 
 .hero-mark {
   display: block;
-  width: 1.28em;
+  width: clamp(2.6rem, 4cm, 4cm);
   height: auto;
   max-width: none;
 }
