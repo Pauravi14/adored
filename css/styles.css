@@ -217,14 +217,28 @@ p {
 }
 
 .hero-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
   margin: 0 0 1.15rem;
-  line-height: 0;
 }
 
-.hero-logo {
+.hero-mark {
   display: block;
-  height: clamp(4.5rem, 14vw, 7.5rem);
+  height: clamp(3.25rem, 9vw, 4.85rem);
   width: auto;
+}
+
+.hero-brand-text {
+  font-family: var(--font-script);
+  font-size: clamp(3.6rem, 10vw, 6.4rem);
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  letter-spacing: 0.03em;
+  line-height: 0.92;
+  white-space: nowrap;
 }
 
 .hero-title {
