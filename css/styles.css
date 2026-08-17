@@ -236,7 +236,7 @@ p {
 
 .hero-mark {
   display: block;
-  width: clamp(2.6rem, 4cm, 4cm);
+  width: clamp(3rem, 6cm, 6cm);
   height: auto;
   max-width: none;
 }
@@ -336,6 +336,18 @@ p {
   animation: brand-shine 2.4s linear infinite;
 }
 
+.path-word-end.is-in::before {
+  animation: star-twinkle 1.15s ease-in-out infinite;
+}
+
+.path-word-end.is-in::after {
+  animation: star-twinkle 1.15s ease-in-out 0.35s infinite;
+}
+
+.path-word-end.is-in .brand-glints {
+  animation: star-twinkle 0.9s ease-in-out 0.2s infinite;
+}
+
 .path-word-end::before,
 .path-word-end::after {
   content: "";
@@ -355,7 +367,7 @@ p {
     radial-gradient(1px 1px at 92% 76%, #ffe7c2 80%, transparent 81%);
   mix-blend-mode: screen;
   opacity: 0;
-  animation: star-twinkle 1.15s ease-in-out 2.2s infinite;
+  animation: none;
 }
 
 .path-word-end::after {
@@ -369,7 +381,7 @@ p {
     radial-gradient(0.9px 0.9px at 72% 20%, #fff 80%, transparent 81%),
     radial-gradient(1.1px 1.1px at 82% 90%, #ffd9a0 80%, transparent 81%),
     radial-gradient(1px 1px at 90% 68%, #fff 80%, transparent 81%);
-  animation-delay: 2.7s;
+  animation: none;
 }
 
 .brand-glints {
@@ -385,7 +397,7 @@ p {
     radial-gradient(1px 1px at 93% 74%, #ffe7c2 70%, transparent 71%);
   mix-blend-mode: screen;
   opacity: 0;
-  animation: star-twinkle 0.9s ease-in-out 2.5s infinite;
+  animation: none;
 }
 
 @keyframes word-in {

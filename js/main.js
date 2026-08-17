@@ -71,20 +71,27 @@
     const tick = (now) => {
       if (start == null) start = now;
       const t = (now - start) % cycle;
-      const progress = t < moveMs ? t / moveMs : 1;
+      const inMove = t < moveMs;
+      const progress = inMove ? t / moveMs : 1;
       const x = progress * track.clientWidth;
-      chevron.style.transform = `translate(${x}px, -50%) translateX(-50%)`;
-      chevron.style.opacity = t < 80 ? String(t / 80) : "1";
-      if (progress >= 0.98 && !shown) {
+      chevron.style.transform = `translate(${x}px, -50%) translateX(-100%)`;
+      chevron.style.opacity = inMove && t < 80 ? String(t / 80) : "1";
+
+      if (progress >= 1 && !shown) {
         shown = true;
         brandWord?.classList.add("is-in");
       }
+      if (inMove && progress < 0.03) {
+        shown = false;
+        brandWord?.classList.remove("is-in");
+      }
+
       requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
   } else {
     if (chevron && track) {
-      chevron.style.transform = `translate(${track.clientWidth}px, -50%) translateX(-50%)`;
+      chevron.style.transform = `translate(${track.clientWidth}px, -50%) translateX(-100%)`;
     }
     brandWord?.classList.add("is-in");
   }
