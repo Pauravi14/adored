@@ -112,6 +112,7 @@ p {
   text-transform: none;
   letter-spacing: 0.02em;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .nav {
@@ -206,13 +207,14 @@ p {
 
 .hero-brand {
   font-family: var(--font-script);
-  font-size: clamp(4.4rem, 12vw, 7.4rem);
+  font-size: clamp(3.6rem, 10vw, 6.4rem);
   font-weight: 400;
   font-variant: normal;
   text-transform: none;
   letter-spacing: 0.03em;
   line-height: 0.92;
   margin: 0 0 1.15rem;
+  white-space: nowrap;
 }
 
 .hero-title {
