@@ -75,7 +75,7 @@
       const x = progress * track.clientWidth;
       chevron.style.transform = `translate(${x}px, -50%) translateX(-50%)`;
       chevron.style.opacity = t < 80 ? String(t / 80) : "1";
-      if (progress >= 1 && !shown) {
+      if (progress >= 0.98 && !shown) {
         shown = true;
         brandWord?.classList.add("is-in");
       }

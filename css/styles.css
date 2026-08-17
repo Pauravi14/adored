@@ -286,9 +286,9 @@ p {
 }
 
 .path-word-end.is-in {
-  animation:
-    brand-in 0.35s var(--ease) forwards,
-    brand-shine 2.4s linear 0.35s infinite;
+  opacity: 1;
+  transform: none;
+  animation: brand-shine 2.4s linear infinite;
 }
 
 .path-word-end::before,
