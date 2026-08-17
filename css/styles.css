@@ -283,9 +283,12 @@ p {
   color: transparent;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 8px rgba(212, 165, 116, 0.45));
+}
+
+.path-word-end.is-in {
   animation:
-    brand-in 0.6s var(--ease) 1.85s forwards,
-    brand-shine 2.4s linear 2.4s infinite;
+    brand-in 0.35s var(--ease) forwards,
+    brand-shine 2.4s linear 0.35s infinite;
 }
 
 .path-word-end::before,
@@ -974,6 +977,9 @@ p {
   }
 
   .path-word-end {
+    animation: none;
+    opacity: 1;
+    transform: none;
     color: var(--lamp);
     -webkit-text-fill-color: var(--lamp);
     background: none;

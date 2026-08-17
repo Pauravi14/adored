@@ -59,9 +59,11 @@
 
   const chevron = document.querySelector("[data-orbit-chevron]");
   const track = chevron && chevron.parentElement;
+  const brandWord = document.querySelector(".path-word-end");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (chevron && track && !reduceMotion) {
     let start = null;
+    let shown = false;
     const moveMs = 900;
     const holdMs = 1500;
     const cycle = moveMs + holdMs;
@@ -73,10 +75,17 @@
       const x = progress * track.clientWidth;
       chevron.style.transform = `translate(${x}px, -50%) translateX(-50%)`;
       chevron.style.opacity = t < 80 ? String(t / 80) : "1";
+      if (progress >= 1 && !shown) {
+        shown = true;
+        brandWord?.classList.add("is-in");
+      }
       requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
-  } else if (chevron && track) {
-    chevron.style.transform = `translate(${track.clientWidth}px, -50%) translateX(-50%)`;
+  } else {
+    if (chevron && track) {
+      chevron.style.transform = `translate(${track.clientWidth}px, -50%) translateX(-50%)`;
+    }
+    brandWord?.classList.add("is-in");
   }
 })();
